@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Compose-Tweet Details</string>
+    <string name="retweets">Retweets</string>
+    <string name="likes">Likes</string>
+
+    
+</resources>
