@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -71,6 +72,8 @@ fun homePageContent(mainViewModel: MainViewModel = viewModel()) {
                 date = tweetDetails!!.formatDate()
             )
             divider()
+            tweetReachInfoBlock()
+            divider()
             tweetActionBlock()
         }
     }
@@ -80,7 +83,7 @@ fun homePageContent(mainViewModel: MainViewModel = viewModel()) {
 @Preview(showBackground = true)
 @Composable
 fun divider() {
-    Divider(color = Color.Gray, thickness = 1.dp)
+    Divider(color = Color.LightGray, thickness = 0.5.dp)
 }
 
 
@@ -100,6 +103,8 @@ fun homePageContentPreview() {
             tweetContentPreview()
             divider()
             tweetTimestampPreview()
+            divider()
+            tweetReachInfoBlock()
             divider()
             tweetActionBlock()
         }
@@ -136,7 +141,7 @@ fun userProfileView(userName: String, userHandle: String) {
             painter = painterResource(id = R.drawable.ic_profile),
             contentDescription = "Profile Image",
             modifier = Modifier
-                .size(36.dp)
+                .size(60.dp)
                 .clip(CircleShape)
                 .border(1.dp, Color.Transparent, CircleShape),
             contentScale = ContentScale.Crop
@@ -145,8 +150,12 @@ fun userProfileView(userName: String, userHandle: String) {
             modifier = Modifier
                 .padding(start = 12.dp)
         ) {
-            Text(text = userName, fontSize = 20.sp, fontWeight = FontWeight.Bold)
-            Text(text = userHandle, fontSize = 14.sp)
+            Text(text = userName, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+            Text(
+                text = userHandle,
+                fontSize = 12.sp,
+                color = colorResource(id = R.color.shade_grey)
+            )
         }
     }
 }
@@ -166,15 +175,16 @@ fun tweetContent(content: String) {
         modifier = Modifier
             .padding(12.dp)
             .wrapContentHeight()
-            .defaultMinSize(minHeight = 200.dp),
-        fontSize = 24.sp
+            .defaultMinSize(minHeight = 150.dp),
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Medium
     )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun tweetTimestampPreview() {
-    tweetTimestamp("11:30", "12/03/2021")
+    tweetTimestamp("11:30 AM ", "12 Mar 2021")
 }
 
 @Composable
@@ -183,7 +193,7 @@ fun tweetTimestamp(time: String, date: String) {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(8.dp),
+            .padding(12.dp),
         horizontalArrangement = Arrangement.Start
     ) {
         Text(
@@ -196,7 +206,8 @@ fun tweetTimestamp(time: String, date: String) {
                     append(date)
                 }
             },
-            modifier = Modifier.padding(end = 8.dp)
+            modifier = Modifier.padding(end = 8.dp),
+            color = colorResource(id = R.color.shade_grey)
         )
     }
 }
@@ -208,7 +219,7 @@ fun tweetReachInfoBlock() {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(8.dp),
+            .padding(12.dp),
         horizontalArrangement = Arrangement.Start
     ) {
         Text(
@@ -217,12 +228,17 @@ fun tweetReachInfoBlock() {
                     append("3")
                 }
                 append(" ")
-                withStyle(style = SpanStyle(fontWeight = FontWeight.Normal)) {
+                withStyle(
+                    style = SpanStyle(
+                        fontWeight = FontWeight.Normal,
+                        color = colorResource(id = R.color.shade_grey)
+                    )
+                ) {
 
                     append(stringResource(id = R.string.retweets))
                 }
             },
-            modifier = Modifier.padding(end = 8.dp)
+            modifier = Modifier.padding(end = 24.dp)
         )
 
         Text(buildAnnotatedString {
@@ -230,7 +246,12 @@ fun tweetReachInfoBlock() {
                 append("3")
             }
             append(" ")
-            withStyle(style = SpanStyle(fontWeight = FontWeight.Normal)) {
+            withStyle(
+                style = SpanStyle(
+                    fontWeight = FontWeight.Normal,
+                    color = colorResource(id = R.color.shade_grey)
+                )
+            ) {
                 append(stringResource(id = R.string.likes))
             }
         })
@@ -253,7 +274,7 @@ fun tweetActionBlock() {
         Image(painter = painterResource(id = R.drawable.ic_retweet), contentDescription = "")
 
         Image(
-            painter = painterResource(id = R.drawable.ic_favorite_filled),
+            painter = painterResource(id = R.drawable.ic_favorite_outline),
             contentDescription = ""
         )
 
