@@ -18,7 +18,8 @@ class MainViewModel : ViewModel() {
         _lastTweet.value = TweetDetails(
             authorName = "Mohit Sharma",
             handle = "@codeWithMohit",
-            tweetContent = "Heard a lot on #JetpackCompose, since #googleio2021, but failed to understand the benefits for existing commercial app's. So, thought of create an app on my own to understand it",
+            tweetContent = "The production-ready version of compose is here.\n" +
+                    "#JetpackCompose",
             timeStamp = "2020-06-24T16:28:14.000Z"
         )
     }
